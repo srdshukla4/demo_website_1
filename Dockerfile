@@ -1,12 +1,15 @@
-FROM python:3.8
+FROM node:16.13.0
 
 WORKDIR /app
 
-COPY index*.html .docker/
+ENV PORT 80
 
-RUN  pip install django
+COPY index_js.js .docker/
 
-COPY . .
+RUN  npm install
 
+COPY . ./app
+
+CMD [ "node" ,"src/server.js" ]
 
 
